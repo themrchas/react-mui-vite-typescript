@@ -84,4 +84,9 @@ react forms formik
 A component's available slots can be seen on slots can be seen on mui com
 
 There are 'theme' slots and 'component' slots.  Only 'theme' slots can be overrideen using styleoverride.
+
+https://mui.com/material-ui/customization/how-to-customize/-
+The styles injected into the DOM by Material UI rely on class names that all follow a standard pattern: [hash]-Mui[Component name]-[name of the slot]. Note the 'slot' reference.
+
+
 ```

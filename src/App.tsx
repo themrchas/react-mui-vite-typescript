@@ -13,7 +13,10 @@ import { MuiCard } from './components/MuiCard';
 import { MuiAccordian } from './components/MuiAccordian';
 import { MuiTextField } from './components/MuiTextField';
 import { MuiSelect } from './components/MuiSelect';
+
+
 import { ThemeProvider } from "@mui/material/styles";
+import { MuiStylingExamples } from './components/MuiStylingExamples';
 
 
 
@@ -29,7 +32,8 @@ function App() {
       <MuiButton></MuiButton>
     */}
     
-    <MuiTextField /> 
+    <MuiStylingExamples />
+   {/*  <MuiTextField /> */}
     {/* } <MuiSelect /> */}
     {/* <MuiCheckbox /> */}
     {/* <MuiAutocomplete /> */}

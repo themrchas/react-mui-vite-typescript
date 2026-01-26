@@ -1,4 +1,4 @@
-import { Stack, TextField, Typography, InputAdornment, MenuItem, Box, Grid, ThemeProvider } from '@mui/material';
+import { Stack, TextField, Typography, InputAdornment, MenuItem, Box, Grid, ThemeProvider, Button } from '@mui/material';
 import PasswordIcon from '@mui/icons-material/Password';
 import styles from './MuiTextField.module.css';
 
@@ -202,7 +202,7 @@ export const MuiTextField = () => {
                     >Bird</MenuItem>
 
                    
-                    <MenuItem value="dog" 
+                    <MenuItem value="dog" sx={{ '&.MuiMenuItem-root:hover': { color:'red'} }}
                     >Dog
                     </MenuItem>
                     
@@ -213,7 +213,7 @@ export const MuiTextField = () => {
 
 
                     
-                    <MenuItem value="fish" 
+                    <MenuItem value="fish" sx={{ '&.MuiMenuItem-root': { paddingLeft:'40px'} }}
                     >Fish
                     </MenuItem>
                     
@@ -234,12 +234,14 @@ export const MuiTextField = () => {
                     In sx=&#123;&#123; '&.Mui-selected': &#123; backgroundColor: selectedColor &#125;&#125;&#125;<br />
                     The &amp; means this component &lt;MenuItem&gt; with Mui-selected class.
                 </Typography>
-
                 </Grid>
 
+                <Grid size={7}></Grid>
 
+              
 
         </Grid>
+
 
 
 
