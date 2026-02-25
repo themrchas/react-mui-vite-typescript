@@ -90,5 +90,7 @@ The styles injected into the DOM by Material UI rely on class names that all fol
 
 Per copilot - 'sx' target the root element unless otherwise specified
 
-
+const SuccessSlider = styled(Slider)<SliderProps>(({ theme }) => ({    
+  <SliderProps> determines what properties (READ - props) the resulting component SuccessSlider can accept.
+  This is not the same as type of any arguments provideed to the resulting function.
 ```

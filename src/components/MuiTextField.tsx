@@ -2,7 +2,7 @@ import { Stack, TextField, Typography, InputAdornment, MenuItem, Box, Grid, Them
 import PasswordIcon from '@mui/icons-material/Password';
 import styles from './MuiTextField.module.css';
 
-import * as customThemes  from '../theme/MuiTextField'
+import * as customThemes  from '../theme/MuiThemeExamples'
 
 import React, { useState } from 'react';
 import { TheaterComedySharp } from '@mui/icons-material';

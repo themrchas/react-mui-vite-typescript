@@ -1,6 +1,10 @@
-import { Stack, TextField, Typography, Grid, Box, MenuItem, Button } from '@mui/material'
+import { Stack, TextField, Typography, Grid, Box, MenuItem, Button, ThemeProvider } from '@mui/material'
 
 import React, { useState } from 'react';
+
+import { StyledButton, AnotherStyledButton } from './MuiStyled'
+
+import { themeButton } from '../theme/MuiThemeExamples';
 
 export const MuiStylingExamples = () => {
 
@@ -118,7 +122,7 @@ export const MuiStylingExamples = () => {
 
                 <Grid size={1}></Grid>
                 <Grid size={5}>
-                    <Typography component='span' align="left" sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}> Override single instance of a Mui defualt property</Typography>
+                    <Typography component='span' align="left" sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}> Override single instance of a Mui default property</Typography>
                     <Typography variant="body1" sx={{ my: 3 }} align="left">
                         This overrides the 'paddingLeft' property of MuiMenuItem-root slot.
                         sx=&#123;&#123; '&.MuiMenuItem-root': &#123; paddingLeft:'40px' &#125;&#125;&#125;<br />
@@ -174,7 +178,7 @@ export const MuiStylingExamples = () => {
 
                 <Grid size={1}></Grid>
                 <Grid size={5}>
-                    <Typography component='span' align="left" sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}> Override single instance of a Mui defualt property</Typography>
+                    <Typography component='span' align="left" sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}> Override single instance of a Mui default property</Typography>
                     <Typography variant="body1" sx={{ my: 3 }} align="left">
                         This adds the 'color' red property of MuiMenuItem-root slot.<br />
                         sx=&#123;&#123; '&.MuiMenuItem-root: hover': &#123; color:'red' &#125;&#125;&#125;<br />
@@ -267,24 +271,85 @@ export const MuiStylingExamples = () => {
                 {/* This forces the row to be complete (12) places and the next <Grid> item will start on a new row*/}
                 <Grid size={4}></Grid>
 
+                <Grid size={2}>
+                        <StyledButton test={40} fullWidth color="primary" size="large" />
+                </Grid>
+
+                <Grid size={1}></Grid>
+                <Grid size={5}>
+                    <Typography component='span' align="left" sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}>Example of styled()</Typography>
+                    <Typography variant="body1" sx={{ my: 3 }} align="left">
+                        const StyledButton = styled(Button)&lt;MyButtonProps&gt;((props) =&gt; &#123;<br />
+                        This uses an extended interface on ButtonProps in addition to the styled Button component.<br />
+                        The &lt;MyButtonProps&gt; controls the possible properties the component recognizes.<br />
+                        Note that 'props' is used wihtout destructuring.
+                    </Typography>
+
+                </Grid>
+
+                <Grid size={4}></Grid>
 
 
+
+                {/* Note that when color="info" is selected as a property, Mui will apply .Mui-colorInfo class.
+                    If you want to override the default 'info color with Mui-color class, you must override Mui-colorInfo
+                */}
+                 <Grid size={2}>
+                        <AnotherStyledButton test={40} fullWidth color="info" size="large" />
+                </Grid>
+
+                <Grid size={1}></Grid>
+                <Grid size={5}>
+                    <Typography component='span' align="left" sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}>Example of styled()</Typography>
+                    <Typography variant="body1" sx={{ my: 3 }} align="left">
+                        const StyledButton = styled(Button)&lt;MyButtonProps&gt;((&#123;test, theme&#125;)) =&gt; &#123;<br />
+                        This uses an extended interface on ButtonProps in addition to the styled Button component.<br />
+                        Destructuring is used on the test and theme properties of 'props'.
+                    </Typography>
+
+                </Grid>
+
+                <Grid size={4}></Grid>
+
+                <Grid size={12} sx={{mx:"auto"}}>
+                    <Typography variant="h4" sx={{ my: 3 }} align="center">
+                        Below are examples using custom themes
+                    </Typography>
+                </Grid>
+
+
+                <Grid size={2}>
+                        <ThemeProvider theme={themeButton}>
+                        <Button>Yes - money</Button>
+                        </ThemeProvider>
+                </Grid>
+
+                <Grid size={1}></Grid>
+                <Grid size={5}>
+                    <Typography component='span' align="left" sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}>Example of styled()</Typography>
+                    <Typography variant="body1" sx={{ my: 3 }} align="left">
+                        const StyledButton = styled(Button)&lt;MyButtonProps&gt;((&#123;test, theme&#125;)) =&gt; &#123;<br />
+                        This uses an extended interface on ButtonProps in addition to the styled Button component.<br />
+                        Destructuring is used on the test and theme properties of 'props'.
+                    </Typography>
+
+                </Grid>
+
+                <Grid size={4}></Grid>
+
+
+                
+                
 
             </Grid> {/* container */}
 
 
+ 
 
 
-
-
-
-
-
+            
 
         </>
-
-
-
 
     )
 

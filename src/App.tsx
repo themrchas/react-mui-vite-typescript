@@ -32,11 +32,11 @@ function App() {
       <MuiButton></MuiButton>
     */}
     
-    <MuiStylingExamples />
+   {/*  <MuiStylingExamples /> */}
    {/*  <MuiTextField /> */}
     {/* } <MuiSelect /> */}
     {/* <MuiCheckbox /> */}
-    {/* <MuiAutocomplete /> */}
+     <MuiAutocomplete /> 
    {/* <MuiBox /> */}
   {/*   <MuiStack />  */}
   {/* <MuiGrid></MuiGrid> */}

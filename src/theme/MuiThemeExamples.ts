@@ -1,5 +1,8 @@
 import { createTheme } from "@mui/material/styles";
 
+
+
+
 /*
 export default {
   styleOverrides: {
@@ -15,6 +18,24 @@ export default {
 };
 
 */
+
+export const themeButton = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: "rgba(210, 59, 25, 0.15)",
+          },
+          "&.Mui-selected:hover": {
+            backgroundColor: "rgba(210, 59, 25, 0.25)",
+          },
+        },
+      },
+    },
+  },
+
+})
 
 
 
