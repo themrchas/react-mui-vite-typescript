@@ -1,6 +1,6 @@
-import { Stack, Autocomplete, TextField, Box, InputAdornment } from '@mui/material'
+import { Stack, Autocomplete, TextField, Box, InputAdornment,  Chip } from '@mui/material'
 import { Typography } from '@mui/material'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export const MuiAutocomplete = () => {
 
@@ -18,6 +18,13 @@ export const MuiAutocomplete = () => {
         id: number;
         type: string;
         color: string;
+    }
+
+     interface IAutoCompleteTeams {
+        id: number;
+        city: string;
+        name: string;
+        hide: boolean;
     }
 
     interface AutoCompleteMonth {
@@ -40,6 +47,22 @@ export const MuiAutocomplete = () => {
     //Used for the months example.  
     const [monthValues,setMonthValues] = useState<AutoCompleteMonth[]>([])
 
+     //Used for the teams example.  
+
+       const autoCompleteTeams: Array<IAutoCompleteTeams> = [
+
+        {id:1 , city:'Bremen', name: "Werder Bremen", hide:false},
+        {id:2 , city:'Stuttgart', name:"VfB Stuttgart", hide:false},
+        {id:3 , city:'Leverkusen', name:"Bayer 04", hide:false},
+        {id:4 , city:'Hamburg', name:"HSV", hide:false},
+        {id:5 , city:'Frankfurt', name:"SGE Frankfurt", hide:false},
+
+    ]
+
+    const [teamValues,setTeamValues] = useState<string[]>([])
+    const [chosenTeam,setChosenTeam] = useState<IAutoCompleteTeams | null>(null)
+    const [teamsToDisplay,setTeamsToDisplay] = useState<IAutoCompleteTeams[]>(autoCompleteTeams)
+
     
     useEffect(() => {
 
@@ -51,8 +74,8 @@ export const MuiAutocomplete = () => {
 
         setMonthValues(monthObjects);
         
-   // },[]);
-    });
+    },[]);
+    //});
 
     
     const autoCompleteCountries: AutoCompleteCountries[] = [
@@ -84,14 +107,13 @@ export const MuiAutocomplete = () => {
         {id:5 , type:'Hamster', color:"Brown"},
 
     ]
-
-
+    
 
     const handleCountryChange = (event:React.SyntheticEvent,value:AutoCompleteCountries | null) => {
 
         console.log('handleCountryChange: event is',event,'value is',value);
 
-        setChosenCountry( (prevChosenCountry:AutoCompleteCountries | null) => value);
+       
     }
 
     //The 'string' is required when freeSolo property is used on the Autocomplete
@@ -108,6 +130,59 @@ export const MuiAutocomplete = () => {
 
         setChosenMonth( (prevChosenMonth:AutoCompleteMonth | null) => value);
     }
+
+
+
+     //The 'string' is required when freeSolo property is used on the Autocomplete
+    const addTeam = (event:React.SyntheticEvent, teamToAdd:IAutoCompleteTeams | null) => {
+   
+        console.log('handleTeamChange: event is',event,'value is',teamToAdd);
+
+        console.log("inputValue 'chosenTeam' is", chosenTeam)
+
+        console.log('teamsToDisplay is', teamsToDisplay);
+       
+        //This is used to clear the autocomplete TextBox once a selection has been made
+        setChosenTeam(null)
+        //setChosenTeam(teamToAdd)
+        
+        //Set the values used in chips
+        setTeamValues( (prevChosenTeams:string[]) => [...prevChosenTeams, teamToAdd!.name])
+     
+        //Set appropriate 'hide' value
+        setTeamsToDisplay( (prevTeamsToDisplay) => 
+
+            prevTeamsToDisplay.map(el => el.name === teamToAdd!.name ? {...el, hide:true } : el
+            
+        ))
+        
+
+    } //addTeam  
+        
+
+    const deleteTeamChip = (teamName:string) => {
+
+        return (event: React.SyntheticEvent) => {
+
+        console.log("deleteTeamChip event", teamName);
+
+        setTeamValues( (prevChosenTeams:string[]) => [...prevChosenTeams.filter(value => value !== teamName)]       )
+
+         setTeamsToDisplay( (prevTeamsToDisplay) => 
+
+            prevTeamsToDisplay.map(el => el.name === teamName ? {...el, hide:false } : el
+            
+        ))
+
+        }
+
+
+
+    } //deleteTeamChip
+
+    const memoTeamsToDisplay = useMemo( () => {
+        return teamsToDisplay.filter( el => !el.hide)
+    }, [teamsToDisplay])
 
 
     return (
@@ -177,7 +252,7 @@ export const MuiAutocomplete = () => {
                 <Box>
                 <Typography sx={{ my: 3, textAlign: 'left' }} >
                         This example saves the chosen value to a state variable.
-                    </Typography>
+                </Typography>
                 <Autocomplete
                         options={monthValues}
                         getOptionLabel={(option) => option == null ? "money": option.month}
@@ -199,6 +274,42 @@ export const MuiAutocomplete = () => {
                     />
                     <Typography sx={{textAlign: 'left'}}>{chosenMonth !== null ?  `Chosen month is ${chosenMonth.month}` : "No month selected"}</Typography>
                
+                </Box>
+
+                <Box>
+                    <Typography variant="h6" sx={{ my: 3, textAlign: 'left' }} >
+                        This example is a multichoice that wraps chosen fields in a chip.<br /><br />
+                        In addition, the Autocomplete Textfield is cleared once the selection has been made.
+                    </Typography>
+                    <Autocomplete
+                       // options={autoCompleteTeams}
+                       // options={teamsToDisplay}
+                       options={memoTeamsToDisplay}
+                        getOptionLabel={(option) => option == null ? "money": option.name}
+                        renderInput={(params) => <TextField {...params} label="Teams" />}
+                        sx={{ width: 1 / 2 }}
+                        onChange={addTeam}
+                        value={chosenTeam}
+                    />
+                    <Box>Chosen values
+                        {
+                            teamValues.map((teamName) => {
+
+                                return (
+
+                                    <Chip label={teamName} onDelete={(event) => deleteTeamChip(teamName)(event)}/>
+
+                                )
+
+                        })
+
+
+
+                        }
+
+
+                    </Box>
+                    <Typography sx={{textAlign: 'left'}}>{chosenCountry !== null ? `Chosen country is ${chosenCountry.label}` : "No country selected"}</Typography>
                 </Box>
             </Stack>
         </Box>

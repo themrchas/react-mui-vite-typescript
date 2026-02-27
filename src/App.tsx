@@ -17,6 +17,7 @@ import { MuiSelect } from './components/MuiSelect';
 
 import { ThemeProvider } from "@mui/material/styles";
 import { MuiStylingExamples } from './components/MuiStylingExamples';
+import { MuiChip } from './components/MuiChip';
 
 
 
@@ -33,15 +34,16 @@ function App() {
     */}
     
    {/*  <MuiStylingExamples /> */}
-   {/*  <MuiTextField /> */}
-    {/* } <MuiSelect /> */}
+    {/* <MuiTextField />  */}
+   {/* <MuiSelect /> */}
     {/* <MuiCheckbox /> */}
-     <MuiAutocomplete /> 
+    < MuiAutocomplete />  
    {/* <MuiBox /> */}
   {/*   <MuiStack />  */}
   {/* <MuiGrid></MuiGrid> */}
  {/*  <MuiCard></MuiCard> */}
  {/* <MuiAccordian /> */}
+ {/* < MuiChip /> */}
       
     </div>
   );
