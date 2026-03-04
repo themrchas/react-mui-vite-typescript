@@ -33,6 +33,12 @@ export const MuiAutocomplete = () => {
        
     }
 
+    interface IAutoCompleteGrouping {
+        id: number;
+        region: string,
+        state: string
+    }
+
 
 
     //Tracks the car model chosen
@@ -107,6 +113,19 @@ export const MuiAutocomplete = () => {
         {id:5 , type:'Hamster', color:"Brown"},
 
     ]
+
+    const autoCompleteGrouping: Array<IAutoCompleteGrouping> = [
+
+        {id:1 , region:'North', state: "New York"},
+        {id:2 , region:'North', state: "New Jersey"},
+        {id:3 , region:'North', state: "Vermont"},
+        {id:4 , region:'South', state: "Florida"},
+        {id:5 , region:'South', state: "Georgia"},
+        {id:6 , region:'South', state: "Alabama"},
+
+    ]
+
+
     
 
     const handleCountryChange = (event:React.SyntheticEvent,value:AutoCompleteCountries | null) => {
@@ -282,9 +301,7 @@ export const MuiAutocomplete = () => {
                         In addition, the Autocomplete Textfield is cleared once the selection has been made.
                     </Typography>
                     <Autocomplete
-                       // options={autoCompleteTeams}
-                       // options={teamsToDisplay}
-                       options={memoTeamsToDisplay}
+                        options={memoTeamsToDisplay}
                         getOptionLabel={(option) => option == null ? "money": option.name}
                         renderInput={(params) => <TextField {...params} label="Teams" />}
                         sx={{ width: 1 / 2 }}
@@ -311,6 +328,23 @@ export const MuiAutocomplete = () => {
                     </Box>
                     <Typography sx={{textAlign: 'left'}}>{chosenCountry !== null ? `Chosen country is ${chosenCountry.label}` : "No country selected"}</Typography>
                 </Box>
+
+<Box>
+                    <Typography sx={{ my: 3, textAlign: 'left' }} >
+                        This example demonstrates how to use grouping.
+                    </Typography>
+                    <Autocomplete
+                        options={autoCompleteGrouping}
+                        groupBy={(option)=> option.region}
+                        getOptionLabel={(option) => option.state}
+
+                        renderInput={(params) => <TextField {...params} label="Grouping Example" />}
+                        sx={{ width: 1 / 2 }}
+
+                    />
+                </Box>
+
+
             </Stack>
         </Box>
 
